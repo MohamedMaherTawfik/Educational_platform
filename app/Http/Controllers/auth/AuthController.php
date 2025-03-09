@@ -5,10 +5,12 @@ namespace App\Http\Controllers\auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\addressRequest;
 use App\Http\Requests\userRequest;
+use App\Mail\RegisterMail;
 use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -23,6 +25,7 @@ class AuthController extends Controller
         if (!$user) {
             return $this->sendError('Register Failed');
         }
+        Mail::to(Auth::user()->email)->send(new RegisterMail());
         return $this->apiResponse($user, __('messages.register'));
     }
 
