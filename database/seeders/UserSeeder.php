@@ -20,13 +20,14 @@ class UserSeeder extends Seeder
                 'name' => 'Mohamed Maher',
                 'password' => Hash::make('M7mdmaher11'),
                 'role' => 'admin',
+                'academic_year' => 'Fourth Year',
                 'phone' => '+201024328382',
             ],
             [
                 'email' => 'AhmedMaher@gmail.com',
                 'name' => 'Ahmed Maher',
                 'password' => Hash::make('Ahmedmaher11'),
-                'role' => 'user',
+                'academic_year' => 'Fifth Year',
                 'phone' => '+201007352061',
             ]
             ];

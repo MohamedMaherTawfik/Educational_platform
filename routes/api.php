@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Middleware\adminCheck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +16,12 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('jwt.auth');
     Route::post('/profile', [AuthController::class, 'profile'])->middleware('jwt.auth');
     Route::post('/user/address', [AuthController::class, 'addAddress'])->middleware('jwt.auth');
+});
+
+Route::controller(CourseController::class)->group(function () {
+    Route::get('/courses', 'index');
+    Route::get('/course/{id}', 'find');
+    Route::post('/course', 'store')->middleware('jwt.auth')->middleware(adminCheck::class);
+    Route::post('/course/{id}', 'update');
+    Route::delete('/course/{id}', 'destroy');
 });

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Events\NewDataEvent;
 use App\Interfaces\CoursesInterface;
 use App\Models\Courses;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 
 class CourseRepository implements CoursesInterface{
@@ -21,7 +22,13 @@ class CourseRepository implements CoursesInterface{
 
     public function createCourse($data)
     {
-        $data= Courses::create($data);
+        $data= Courses::create([
+            'title'=>$data['title'],
+            'description'=>$data['description'],
+            'image'=>$data['image'],
+            'price'=>$data['price'],
+            'user_id'=>Auth::user()->id
+        ]);
         Event::dispatch(new NewDataEvent($data));
         return $data;
     }

@@ -23,12 +23,11 @@ class userRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|max:5',
+            'name' => 'required|min:3|max:50',
             'email' => 'required|email|unique:users',
             'phone' => 'required|min:5',
-            'password|confirmed' => ['required',Password::min(8)->mixedCase()->numbers()],
+            'password' => ['required','confirmed',Password::min(8)->mixedCase()->numbers()],
             'academic_year' => 'min:4|max:15',
-            'role' => 'in:admin,user,instructor',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }

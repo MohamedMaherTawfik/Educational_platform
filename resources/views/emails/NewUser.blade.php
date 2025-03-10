@@ -1,1 +1,1 @@
-<h1>wekcome {{$user->name}} To our Website</h1>
+<h1>welcome {{$user->name}} To our Website</h1>

@@ -8,7 +8,6 @@ use App\Http\Requests\userRequest;
 use App\Mail\RegisterMail;
 use App\Models\User;
 use App\Models\UserAddress;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -25,7 +24,7 @@ class AuthController extends Controller
         if (!$user) {
             return $this->sendError('Register Failed');
         }
-        Mail::to(Auth::user()->email)->send(new RegisterMail());
+        Mail::to($user->email)->send(new RegisterMail($user));
         return $this->apiResponse($user, __('messages.register'));
     }
 

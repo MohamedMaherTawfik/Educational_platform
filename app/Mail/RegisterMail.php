@@ -18,9 +18,9 @@ class RegisterMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($user)
     {
-        $this->user=Auth::user();
+        $this->user=$user;
     }
 
     /**
@@ -39,7 +39,7 @@ class RegisterMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.NewUser',
+            view: 'emails.NewUser',
         );
     }
 

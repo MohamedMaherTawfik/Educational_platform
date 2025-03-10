@@ -2,12 +2,15 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\admin\apiResponse;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class BearerToken
+class adminCheck
 {
+    use apiResponse;
     /**
      * Handle an incoming request.
      *
@@ -15,6 +18,10 @@ class BearerToken
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+        if (Auth::user()->role != 'admin') {
+            return $this->sendError('Unauthorized');
+        }
         return $next($request);
     }
 }

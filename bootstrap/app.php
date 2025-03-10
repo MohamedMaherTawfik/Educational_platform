@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\adminCheck;
 use App\Http\Middleware\ApiKeyMidleware;
 use App\Http\Middleware\BearerToken;
 use App\Http\Middleware\LanguageMiddleware;
@@ -18,7 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(ApiKeyMidleware::class);
         $middleware->append(LanguageMiddleware::class);
-        $middleware->append(BearerToken::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

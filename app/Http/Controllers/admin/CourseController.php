@@ -38,12 +38,18 @@ class CourseController extends Controller
     public function store(CourseRequest $request)
     {
         $fields=$request->validated();
-        $data= $this->courseServices->store($fields);
-        if(!$data)
+        if($fields['image']){
+            $file=$request->file('image');
+            $name=time().'.'.$file->getClientOriginalName();
+            $file->move(public_path('courses'),$name);
+            $fields['image']=$name;
+        }
+        $course= $this->courseServices->store($fields);
+        if(!$course)
         {
             return $this->sendError('Course Not Created');
         }
-        return $this->apiResponse($data,'Course Created Successfully');
+        return $this->apiResponse($course,'Course Created Successfully');
     }
 
     public function update(courseRequest $request)
