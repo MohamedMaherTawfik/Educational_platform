@@ -32,7 +32,7 @@ class CourseController extends Controller
         {
             return $this->sendError('course Not Found');
         }
-        return $this->apiResponse('Course Fetched Successfully');
+        return $this->apiResponse($data,'Course Fetched Successfully');
     }
 
     public function store(CourseRequest $request)
@@ -49,7 +49,7 @@ class CourseController extends Controller
         {
             return $this->sendError('Course Not Created');
         }
-        return $this->apiResponse($course,'Course Created Successfully');
+        return $this->apiResponse($course,'Course Created Successfully','email Sent to Current User');
     }
 
     public function update(courseRequest $request)
@@ -69,6 +69,6 @@ class CourseController extends Controller
         {
             return $this->sendError('Course Not found');
         }
-        return $this->apiResponse('course deleted successfully');
+        return $this->apiResponse($data,'course deleted successfully');
     }
 }

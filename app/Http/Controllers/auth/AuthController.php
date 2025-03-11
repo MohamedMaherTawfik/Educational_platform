@@ -83,4 +83,13 @@ class AuthController extends Controller
         }
         return $this->apiResponse($data, 'Address Added Successfully');
     }
+
+    public function userCourses()
+    {
+        $user= user::with('courses')->find(auth()->user()->id);
+        if(!$user){
+            return $this->sendError('user Not Found');
+        }
+        return $this->apiResponse($user, 'User Courses');
+    }
 }
