@@ -2,10 +2,12 @@
 
 namespace App\Repository;
 
+use App\Events\NewDataEvent;
 use App\Interfaces\LessonInterface;
 use App\Mail\createMail;
 use App\Models\Courses;
 use App\Models\Lesson;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 
 class lessonRepository implements LessonInterface
@@ -29,7 +31,7 @@ class lessonRepository implements LessonInterface
             'courses_id' => $id,
             'user_id' => auth()->user()->id
         ]);
-        Mail::to(auth()->user()->email)->send(new createMail($lesson));
+        Event::dispatch(new NewDataEvent($lesson) );
         return $lesson;
     }
 
@@ -42,7 +44,9 @@ class lessonRepository implements LessonInterface
 
     public function deleteLesson($id)
     {
-        return Lesson::destroy($id);
+        $data= Lesson::find($id);
+        $data->delete($id);
+        return $data;
     }
 
 

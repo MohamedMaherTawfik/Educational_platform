@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\lessonController;
+use App\Http\Controllers\admin\QuizController;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Middleware\adminCheck;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -32,6 +33,14 @@ Route::controller(lessonController::class)->group(function () {
     Route::get('course/{id}/lessons', 'allLessons');
     Route::get('/lesson/{id}', 'findLesson');
     Route::post('course/{id}/lesson', 'storeLesson')->middleware(adminCheck::class);
-    Route::post('/lesson/{id}', 'updateLesson');
-    Route::delete('/lesson/{id}', 'deleteLesson');
+    Route::post('/lesson/{id}', 'updateLesson')->middleware(BelongsTo::class,adminCheck::class);
+    Route::delete('/lesson/{id}', 'deleteLesson')->middleware(BelongsTo::class,adminCheck::class);
+});
+
+Route::controller(QuizController::class)->group(function () {
+    Route::get('lesson/{id}/quizes', 'index');
+    Route::get('/quiz/{id}', 'find');
+    Route::post('lesson/{id}/quiz', 'store')->middleware(adminCheck::class);
+    Route::post('/quiz/{id}', 'update')->middleware(BelongsTo::class,adminCheck::class);
+    Route::delete('/quiz/{id}', 'destroy')->middleware(BelongsTo::class,adminCheck::class);
 });

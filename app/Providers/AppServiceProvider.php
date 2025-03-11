@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Interfaces\LessonInterface;
+use App\Interfaces\QuizesInterface;
 use App\Repository\lessonRepository;
+use App\Repository\QuizRepository;
 use Illuminate\Support\ServiceProvider;
 use Tymon\JWTAuth\Http\Middleware\Authenticate as JWTMiddleware;
 use App\Interfaces\CoursesInterface;
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(CoursesInterface::class,CourseRepository::class);
         $this->app->bind(LessonInterface::class,lessonRepository::class);
+        $this->app->bind(QuizesInterface::class,QuizRepository::class);
     }
 
     /**

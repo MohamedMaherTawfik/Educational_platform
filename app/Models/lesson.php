@@ -18,4 +18,9 @@ class lesson extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function quizes()
+    {
+        return $this->hasMany(quizes::class);
+    }
 }
