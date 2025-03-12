@@ -10,6 +10,8 @@ use Illuminate\Support\ServiceProvider;
 use Tymon\JWTAuth\Http\Middleware\Authenticate as JWTMiddleware;
 use App\Interfaces\CoursesInterface;
 use App\Repository\CourseRepository;
+use App\Interfaces\QuestionInterface;
+use App\Repository\QuestionRepository;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CoursesInterface::class,CourseRepository::class);
         $this->app->bind(LessonInterface::class,lessonRepository::class);
         $this->app->bind(QuizesInterface::class,QuizRepository::class);
+        $this->app->bind(QuestionInterface::class,QuestionRepository::class);
     }
 
     /**

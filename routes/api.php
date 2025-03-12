@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\lessonController;
+use App\Http\Controllers\admin\QuestionController;
 use App\Http\Controllers\admin\QuizController;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Middleware\adminCheck;
@@ -43,4 +44,12 @@ Route::controller(QuizController::class)->group(function () {
     Route::post('lesson/{id}/quiz', 'store')->middleware(adminCheck::class);
     Route::post('/quiz/{id}', 'update')->middleware(BelongsTo::class,adminCheck::class);
     Route::delete('/quiz/{id}', 'destroy')->middleware(BelongsTo::class,adminCheck::class);
+});
+
+Route::controller(QuestionController::class)->group(function () {
+    Route::get('quiz/{id}/questions', 'index');
+    Route::get('/question/{id}', 'find');
+    Route::post('quiz/{id}/question', 'store')->middleware(adminCheck::class);
+    Route::post('/question/{id}', 'update')->middleware(BelongsTo::class,adminCheck::class);
+    Route::delete('/question/{id}', 'destroy')->middleware(BelongsTo::class,adminCheck::class);
 });
