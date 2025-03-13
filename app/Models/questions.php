@@ -12,4 +12,5 @@ class questions extends Model
     {
         return $this->belongsTo(quizes::class);
     }
+
 }

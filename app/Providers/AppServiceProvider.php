@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\interfaces\AnsewerInterface;
 use App\Interfaces\LessonInterface;
 use App\Interfaces\QuizesInterface;
+use App\Repository\AnswerRepository;
 use App\Repository\lessonRepository;
 use App\Repository\QuizRepository;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(LessonInterface::class,lessonRepository::class);
         $this->app->bind(QuizesInterface::class,QuizRepository::class);
         $this->app->bind(QuestionInterface::class,QuestionRepository::class);
+        $this->app->bind(AnsewerInterface::class,AnswerRepository::class);
     }
 
     /**
