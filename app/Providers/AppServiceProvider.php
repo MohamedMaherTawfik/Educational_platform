@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\interfaces\AnsewerInterface;
+use App\Interfaces\CertificateInterface;
 use App\Interfaces\commentInterface;
 use App\Interfaces\LessonInterface;
 use App\Interfaces\QuizesInterface;
 use App\Repository\AnswerRepository;
+use App\Repository\CertificateRepository;
 use App\Repository\CommentRepository;
 use App\Repository\lessonRepository;
 use App\Repository\QuizRepository;
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(QuestionInterface::class,QuestionRepository::class);
         $this->app->bind(AnsewerInterface::class,AnswerRepository::class);
         $this->app->bind(commentInterface::class,CommentRepository::class);
+        $this->app->bind(CertificateInterface::class,CertificateRepository::class);
     }
 
     /**

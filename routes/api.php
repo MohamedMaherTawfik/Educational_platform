@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AnswerController;
+use App\Http\Controllers\admin\CertificateController;
 use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\lessonController;
 use App\Http\Controllers\admin\QuestionController;
@@ -80,4 +81,13 @@ Route::controller(CommentController::class)->group(function () {
     Route::post('lesson/{id}/comment', 'store');
     Route::post('/comment/{id}', 'update')->middleware(belongTo::class);
     Route::delete('/comment/{id}', 'destroy')->middleware(belongTo::class);
+});
+
+
+Route::controller(CertificateController::class)->group(function () {
+    Route::get('/certificates', 'index');
+    Route::get('/certificate/{id}', 'find');
+    Route::post('/certificate', 'store')->middleware(adminCheck::class);
+    Route::post('/certificate/{id}', 'update')->middleware(belongTo::class,adminCheck::class);
+    Route::delete('/certificate/{id}', 'delete')->middleware(belongTo::class,adminCheck::class);
 });
