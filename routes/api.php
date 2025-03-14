@@ -6,8 +6,9 @@ use App\Http\Controllers\admin\lessonController;
 use App\Http\Controllers\admin\QuestionController;
 use App\Http\Controllers\admin\QuizController;
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\user\CommentController;
 use App\Http\Middleware\adminCheck;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Http\Middleware\belongTo;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -35,39 +36,48 @@ Route::controller(lessonController::class)->group(function () {
     Route::get('course/{id}/lessons', 'allLessons');
     Route::get('/lesson/{id}', 'findLesson');
     Route::post('course/{id}/lesson', 'storeLesson')->middleware(adminCheck::class);
-    Route::post('/lesson/{id}', 'updateLesson')->middleware(BelongsTo::class,adminCheck::class);
-    Route::delete('/lesson/{id}', 'deleteLesson')->middleware(BelongsTo::class,adminCheck::class);
+    Route::post('/lesson/{id}', 'updateLesson')->middleware(belongTo::class,adminCheck::class);
+    Route::delete('/lesson/{id}', 'deleteLesson')->middleware(belongTo::class,adminCheck::class);
 });
 
 Route::controller(QuizController::class)->group(function () {
     Route::get('lesson/{id}/quizes', 'index');
     Route::get('/quiz/{id}', 'find');
     Route::post('lesson/{id}/quiz', 'store')->middleware(adminCheck::class);
-    Route::post('/quiz/{id}', 'update')->middleware(BelongsTo::class,adminCheck::class);
-    Route::delete('/quiz/{id}', 'destroy')->middleware(BelongsTo::class,adminCheck::class);
+    Route::post('/quiz/{id}', 'update')->middleware(belongTo::class,adminCheck::class);
+    Route::delete('/quiz/{id}', 'destroy')->middleware(belongTo::class,adminCheck::class);
 });
 
 Route::controller(QuestionController::class)->group(function () {
     Route::get('quiz/{id}/questions', 'index');
     Route::get('/question/{id}', 'find');
     Route::post('quiz/{id}/question', 'store')->middleware(adminCheck::class);
-    Route::post('/question/{id}', 'update')->middleware(BelongsTo::class,adminCheck::class);
-    Route::delete('/question/{id}', 'destroy')->middleware(BelongsTo::class,adminCheck::class);
+    Route::post('/question/{id}', 'update')->middleware(belongTo::class,adminCheck::class);
+    Route::delete('/question/{id}', 'destroy')->middleware(belongTo::class,adminCheck::class);
 });
 
 Route::controller(QuestionController::class)->group(function () {
     Route::get('quiz/{id}/questions', 'index');
     Route::get('/question/{id}', 'find');
     Route::post('quiz/{id}/question', 'store')->middleware(adminCheck::class);
-    Route::post('/question/{id}', 'update')->middleware(BelongsTo::class,adminCheck::class);
-    Route::delete('/question/{id}', 'destroy')->middleware(BelongsTo::class,adminCheck::class);
+    Route::post('/question/{id}', 'update')->middleware(belongTo::class,adminCheck::class);
+    Route::delete('/question/{id}', 'destroy')->middleware(belongTo::class,adminCheck::class);
 });
 
 
 Route::controller(AnswerController::class)->group(function () {
     Route::get('question/{id}/answers', 'index');
     Route::get('/answer/{id}', 'find');
-    Route::post('question/{id}/answer', 'store')->middleware(adminCheck::class);
-    Route::post('/answer/{id}', 'update')->middleware(BelongsTo::class,adminCheck::class);
-    Route::delete('/answer/{id}', 'destroy')->middleware(BelongsTo::class,adminCheck::class);
+    Route::post('question/{id}/answer', 'store');
+    Route::post('/answer/{id}', 'update');
+    Route::delete('/answer/{id}', 'destroy');
+});
+
+
+Route::controller(CommentController::class)->group(function () {
+    Route::get('lesson/{id}/comments', 'index');
+    Route::get('/comment/{id}', 'find');
+    Route::post('lesson/{id}/comment', 'store');
+    Route::post('/comment/{id}', 'update')->middleware(belongTo::class);
+    Route::delete('/comment/{id}', 'destroy')->middleware(belongTo::class);
 });
