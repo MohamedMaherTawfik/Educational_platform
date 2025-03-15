@@ -28,4 +28,9 @@ class lesson extends Model
     {
         return $this->hasMany(comments::class);
     }
+
+    public function assignments()
+    {
+        return $this->hasMany(assignments::class);
+    }
 }

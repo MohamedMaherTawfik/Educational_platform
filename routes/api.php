@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AnswerController;
+use App\Http\Controllers\admin\AssignmentController;
 use App\Http\Controllers\admin\CertificateController;
 use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\lessonController;
@@ -85,9 +86,18 @@ Route::controller(CommentController::class)->group(function () {
 
 
 Route::controller(CertificateController::class)->group(function () {
-    Route::get('/certificates', 'index');
+    Route::get('course/{id}/certificates', 'index');
     Route::get('/certificate/{id}', 'find');
-    Route::post('/certificate', 'store')->middleware(adminCheck::class);
+    Route::post('course/{id}/certificate', 'store')->middleware(adminCheck::class);
     Route::post('/certificate/{id}', 'update')->middleware(belongTo::class,adminCheck::class);
     Route::delete('/certificate/{id}', 'delete')->middleware(belongTo::class,adminCheck::class);
+});
+
+
+Route::controller(AssignmentController::class)->group(function () {
+    Route::get('lesson/{id}/assignments', 'index');
+    Route::get('/assignment/{id}', 'find');
+    Route::post('lesson/{id}/assignment', 'store')->middleware(adminCheck::class);
+    Route::post('/assignment/{id}', 'update')->middleware(belongTo::class,adminCheck::class);
+    Route::delete('/assignment/{id}', 'destroy')->middleware(belongTo::class,adminCheck::class);
 });
