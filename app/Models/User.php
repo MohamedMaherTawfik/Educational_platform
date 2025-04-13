@@ -19,11 +19,10 @@ class User extends Authenticatable implements JWTSubject
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'phone',
         'academic_year',
         'role',
-        'image',
         'email',
         'password',
     ];
@@ -96,6 +95,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(certificate::class);
     }
 
+    public function assignmentsSubmissions()
+    {
+        return $this->hasMany(assignment_submission::class);
+    }
 
 
 }

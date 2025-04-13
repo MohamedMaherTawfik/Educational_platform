@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\assignments;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,12 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_addresses', function (Blueprint $table) {
+        Schema::create('assignment_submissions', function (Blueprint $table) {
             $table->id();
+            $table->string('file');
+            $table->string('feedback')->nullable();
+            $table->double('grade')->nullable();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->string('address');
-            $table->string('city')->nullable();
-            $table->string('postal_code')->nullable();
+            $table->foreignIdFor(assignments::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_addresses');
+        Schema::dropIfExists('assignment_submissions');
     }
 };

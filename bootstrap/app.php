@@ -17,8 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->append(ApiKeyMidleware::class);
-        $middleware->append(LanguageMiddleware::class);
+        // $middleware->append(ApiKeyMidleware::class);
+        // $middleware->append(LanguageMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
