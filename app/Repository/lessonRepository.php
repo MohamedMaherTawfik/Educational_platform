@@ -4,11 +4,9 @@ namespace App\Repository;
 
 use App\Events\NewDataEvent;
 use App\Interfaces\LessonInterface;
-use App\Mail\createMail;
 use App\Models\Courses;
 use App\Models\Lesson;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class lessonRepository implements LessonInterface
 {
@@ -29,9 +27,8 @@ class lessonRepository implements LessonInterface
             'description' => $data['description'],
             'video' => $data['video'],
             'courses_id' => $id,
-            'user_id' => auth()->user()->id
+            'user_id' => Auth::user()->id
         ]);
-        Event::dispatch(new NewDataEvent($lesson) );
         return $lesson;
     }
 

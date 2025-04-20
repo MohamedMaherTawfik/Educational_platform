@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - e-learning Platform</title>
+    <title>{{ $title ?? 'Admin Dashboard' }} - e-learning Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
 </head>
+
 <body class="bg-gray-100">
     <div class="flex h-screen">
         <!-- Sidebar -->
@@ -24,9 +28,9 @@
 
             <!-- Settings at bottom -->
             <div class="absolute bottom-0 w-64 p-4 border-t border-gray-700">
-                <a href="{{ route('home') }}" class="flex items-center p-3 hover:bg-gray-700 rounded-lg transition-colors">
-                    <i class="fas fa-home w-6"></i>
-                    <span>Home</span>
+                <a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg transition-colors">
+                    <i class="fas fa-cog w-6"></i>
+                    <span>Settings</span>
                 </a>
             </div>
         </div>
@@ -37,8 +41,11 @@
             @include('admin.components.navbar')
 
             <!-- Main Content Area -->
-
+            <main class="flex-1 overflow-y-auto">
+                {{ $slot }}
+            </main>
         </div>
     </div>
 </body>
+
 </html>

@@ -16,7 +16,7 @@ class CourseRepository implements CoursesInterface{
 
     public function getCourse($id)
     {
-        $data=Courses::find($id);
+        $data=Courses::findOrFail($id);
         return $data;
     }
 
@@ -42,7 +42,7 @@ class CourseRepository implements CoursesInterface{
 
     public function deleteCourse($id)
     {
-        $data=Courses::find($id);
+        $data=Courses::findOrFail($id);
         $data->delete();
         return $data;
     }

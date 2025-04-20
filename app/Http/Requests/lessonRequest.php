@@ -24,7 +24,7 @@ class lessonRequest extends FormRequest
         return [
             'title' => 'required|min:3|max:50',
             'description' => 'min:15|max:255',
-            'video' => 'mimes:mp4,mov,ogg,qt|max:100000',
+            'video' => 'nullable|max:1024000',
         ];
     }
 }

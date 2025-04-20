@@ -30,7 +30,7 @@ class AuthController extends Controller
 
     public function login()
     {
-        $token=auth()->attempt(request(['email', 'password']));
+        $token=Auth::attempt(request(['email', 'password']));
         if (!$token) {
             return $this->sendError(__('messages.Error_login'), ['error'=>__('messages.Error_login')]);
         }
@@ -40,23 +40,23 @@ class AuthController extends Controller
     }
     public function profile()
     {
-        $user=auth()->user();
+        $user=User::with('addresses')->find(Auth::user()->id);
         if(!$user){
             return $this->sendError('User Not Found');
         }
-        return $this->apiResponse($user->load('addresses'), 'Profile');
+        return $this->apiResponse($user, 'Profile');
     }
 
     public function logout()
     {
-        auth()->logout();
+        Auth::logout();
 
         return $this->apiResponse([],__('messages.logout'));
     }
 
     public function refresh()
     {
-        $token = $this->respondWithToken(auth()->refresh());
+        $token = $this->respondWithToken(Auth::refresh());
         return $this->apiResponse($token->original, 'Refresh Successfully');
     }
 
@@ -65,7 +65,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => Auth::factory()->getTTL() * 60
         ]);
     }
 
@@ -86,7 +86,7 @@ class AuthController extends Controller
 
     public function userCourses()
     {
-        $user= user::with('courses')->find(auth()->user()->id);
+        $user= user::with('courses')->find(Auth::user()->id);
         if(!$user){
             return $this->sendError('user Not Found');
         }

@@ -1,47 +1,29 @@
 <nav class="p-4">
     <div class="space-y-4">
         <!-- Dashboard -->
-        <a href="#" class="flex items-center p-3 text-white bg-blue-600 rounded-lg">
-            <i class="fas fa-home w-6"></i>
+        <!-- Courses -->
+        <a href="{{ route('admin.courses') }}"
+            class="flex items-center p-3 rounded-lg transition-colors
+{{ request()->routeIs('admin.courses') ? 'bg-white text-blue-600 shadow-lg border-b-4 border-blue-600' : 'text-white hover:bg-gray-700' }}">
+            <i class="fas fa-book w-6 mr-2"></i>
             <span>Courses</span>
         </a>
-
-
-        <!-- Team -->
-        <a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg transition-colors">
-            <i class="fas fa-users w-6"></i>
-            <span>Lessons</span>
-        </a>
-
-        <!-- Projects -->
-        <a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg transition-colors">
-            <i class="fas fa-project-diagram w-6"></i>
-            <span>Quizes</span>
-        </a>
-
-         <!-- Team -->
-         <a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg transition-colors">
-            <i class="fas fa-users w-6"></i>
-            <span>Assignments</span>
-        </a>
-
-        <!-- Calendar -->
-        <a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg transition-colors">
-            <i class="fas fa-calendar w-6"></i>
-            <span>Students</span>
-        </a>
-
-        <!-- Documents -->
-        <a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg transition-colors">
-            <i class="fas fa-file-alt w-6"></i>
+        <!-- Settings -->
+        <a href=""
+            class="flex items-center p-3 rounded-lg transition-colors
+{{ request()->routeIs('admin.settings') ? 'bg-white text-blue-600 shadow-lg border-b-4 border-blue-600' : 'text-white hover:bg-gray-700' }}">
+            <i class="fas fa-cog w-6 mr-2"></i>
             <span>Settings</span>
         </a>
 
         <!-- Reports -->
-        <a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg transition-colors">
-            <i class="fas fa-chart-bar w-6"></i>
+        <a href=""
+            class="flex items-center p-3 rounded-lg transition-colors
+{{ request()->routeIs('admin.reports') ? 'bg-white text-blue-600 shadow-lg border-b-4 border-blue-600' : 'text-white hover:bg-gray-700' }}">
+            <i class="fas fa-chart-bar w-6 mr-2"></i>
             <span>Reports</span>
         </a>
+
     </div>
 
     <!-- Teams Section -->
@@ -64,4 +46,6 @@
             </a>
         </div>
     </div> --}}
+    {{-- end teams section --}}
+
 </nav>
