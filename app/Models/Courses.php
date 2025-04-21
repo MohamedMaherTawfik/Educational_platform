@@ -28,4 +28,9 @@ class Courses extends Model
     {
         return $this->hasMany(Certificate::class);
     }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollments::class);
+    }
 }

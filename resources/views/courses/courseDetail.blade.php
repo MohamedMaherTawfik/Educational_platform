@@ -43,7 +43,7 @@
 
         <div class="bg-white rounded-xl shadow-md p-6 grid md:grid-cols-2 gap-10 mb-10">
             <div>
-                <form action="" method="POST">
+                <form action="{{ route('enrollments.pay', $course->id) }}" method="POST">
                     @csrf
                     <button
                         class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"

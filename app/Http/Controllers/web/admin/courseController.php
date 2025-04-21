@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
 use App\Interfaces\CoursesInterface;
 use App\Models\Courses;
+use App\Models\Enrollments;
 use App\Models\lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,7 +63,13 @@ class courseController extends Controller
     public function showUser()
     {
         $course = $this->courseRepository->getCourse(request('id'));
-        return view('courses.courseDetail', compact('course'));
+        $enrollments=Enrollments::where('courses_id',$course->id)->where('user_id',Auth::user()->id)->get();
+        if($enrollments->count()>0 && $enrollments->toArray()[0]['enrolled']=='yes'){
+            $lessons=lesson::where('courses_id',$course->id)->paginate(3);
+            return view('lesson.index', compact('lessons','course'));
+        }else{
+            return view('courses.courseDetail', compact('course'));
+        }
     }
 
 }

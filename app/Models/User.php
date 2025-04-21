@@ -18,14 +18,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'username',
-        'phone',
-        'academic_year',
-        'role',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -100,5 +93,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(assignment_submission::class);
     }
 
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollments::class);
+    }
 
 }

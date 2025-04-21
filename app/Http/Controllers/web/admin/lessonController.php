@@ -47,9 +47,9 @@ class lessonController extends Controller
         }
     }
 
-    public function show($id)
+    public function show()
     {
-        $lesson = lesson::find($id);
+        $lesson = lesson::find(request('lesson_id'));
         return view('admin.lessons.show', compact('lesson'));
     }
 

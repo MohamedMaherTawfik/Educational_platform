@@ -7,7 +7,9 @@
             </a>
             <div class="ml-10 space-x-6">
                 <a href="{{ route('home') }}" class="text-gray-500 hover:text-gray-800">HOME</a>
-                <a href="{{ route('user.courses') }}" class="text-gray-500 hover:text-gray-800">MY COURSES</a>
+                @if (Auth::check())
+                    <a href="{{ route('user.courses',['id'=>Auth::user()->id]) }}" class="text-gray-500 hover:text-gray-800">MY COURSES</a>
+                @endif
                 <a href="/wishlist" class="text-gray-500 hover:text-gray-800">WISHLIST</a>
                 <a href="{{ route('user.profile') }}" class="text-gray-500 hover:text-gray-800">PROFILE</a>
                 <a href="/contact" class="text-gray-500 hover:text-gray-800">CONTACT</a>

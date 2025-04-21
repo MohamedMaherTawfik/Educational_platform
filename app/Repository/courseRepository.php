@@ -29,7 +29,7 @@ class CourseRepository implements CoursesInterface{
             'price'=>$data['price'],
             'user_id'=>Auth::user()->id
         ]);
-        Event::dispatch(new NewDataEvent($data));
+        // Event::dispatch(new NewDataEvent($data));
         return $data;
     }
 

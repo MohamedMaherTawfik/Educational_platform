@@ -12,7 +12,7 @@ class lessonRepository implements LessonInterface
 {
     public function allLessons($id)
     {
-        return Courses::with('lessons')->find($id);
+        return Lesson::where('courses_id',$id)->get();
     }
 
     public function getLesson($id)

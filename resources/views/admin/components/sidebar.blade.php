@@ -8,6 +8,14 @@
             <i class="fas fa-book w-6 mr-2"></i>
             <span>Courses</span>
         </a>
+
+        <!-- Enrollments -->
+        <a href="{{ route('admin.enrollments') }}"
+            class="flex items-center p-3 rounded-lg transition-colors
+{{ request()->routeIs('admin.enrollments') ? 'bg-white text-blue-600 shadow-lg border-b-4 border-blue-600' : 'text-white hover:bg-gray-700' }}">
+            <i class="fas fa-users w-6 mr-2"></i>
+            <span>Enrollments</span>
+        </a>
         <!-- Settings -->
         <a href=""
             class="flex items-center p-3 rounded-lg transition-colors

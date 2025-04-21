@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\web\home\enrollmentContoller;
 use App\Http\Controllers\web\home\homeController;
 use App\Http\Controllers\web\admin\adminController;
 use App\Http\Controllers\web\admin\courseController;
@@ -42,4 +43,11 @@ Route::controller(lessonController::class)->group(function () {
     Route::post('/admin/course/{id}/lessons/create', 'store')->name('admin.lessons.store')->middleware(checkAdmin::class);
     Route::get('/admin/course/{id}/lessons/{lesson_id}', 'show')->name('admin.lessons.show')->middleware(checkAdmin::class);
     Route::delete('/admin/course/{id}/lessons/{lesson_id}', 'destroy')->name('admin.lessons.destroy')->middleware(checkAdmin::class);
+});
+
+Route::controller(enrollmentContoller::class)->group(function () {
+    Route::get('/admin/enrollments', 'index')->name('admin.enrollments')->middleware(checkAdmin::class);
+    Route::post('/course/{id}', 'pay')->name('enrollments.pay');
+    Route::post('payment/callback', 'callback')->name('paymob.callback');
+    Route::get('payment/response', 'response')->name('response');
 });

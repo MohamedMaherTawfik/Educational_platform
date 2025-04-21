@@ -39,12 +39,11 @@
                 <p class="text-gray-600 mb-4">{{ $course->description }}</p>
 
                 <!-- Align button to the right -->
-                <div class="flex justify-center">
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700">Continue</button>
+                <div class="flex justify-end">
+                    <a href="{{route('course.show',[$course->id])}}" class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700">Show Course</a>
                 </div>
             </div>
         @endforeach
-
     </section>
 
 
