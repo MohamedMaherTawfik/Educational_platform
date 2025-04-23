@@ -60,7 +60,7 @@
 
                 <!-- Overlay Image -->
                 <img src="{{ asset('images/about.png') }}" alt="Clothes rack"
-                    class="absolute -bottom-10 right-1/2 translate-x-1/2 md:-right-20 md:translate-x-0 w-64 h-40 object-cover rounded-md shadow-lg border-4 border-gray-900">
+                    class="absolute -bottom-10 right-1/2 translate-x-1/2 md:-right-20 md:translate-x-0 w-64 h-40 object-cover rounded-md opacity-30 shadow-lg border-4 border-gray-900">
             </div>
 
             <!-- Right: Text Content -->

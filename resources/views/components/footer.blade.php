@@ -12,9 +12,11 @@
                 <h3 class="font-bold mb-4">Quick Links</h3>
                 <ul class="space-y-2">
                     <li><a href="{{ route('home') }}" class="text-gray-500 hover:text-gray-800">Home</a></li>
+                    @if (Auth::check())
                     <li><a href="{{ route('user.courses') }}" class="text-gray-500 hover:text-gray-800">Courses</a></li>
                     <li><a href="{{ route('user.profile') }}" class="text-gray-500 hover:text-gray-800">Profile</a></li>
                     <li><a href="{{ route('user.notification') }}" class="text-gray-500 hover:text-gray-800">Notification</a></li>
+                    @endif
                 </ul>
             </div>
             <div>

@@ -11,7 +11,9 @@
                     <a href="{{ route('user.courses',['id'=>Auth::user()->id]) }}" class="text-gray-500 hover:text-gray-800">MY COURSES</a>
                 @endif
                 <a href="/wishlist" class="text-gray-500 hover:text-gray-800">WISHLIST</a>
-                <a href="{{ route('user.profile') }}" class="text-gray-500 hover:text-gray-800">PROFILE</a>
+                @if (Auth::check())
+                    <a href="{{ route('user.profile') }}" class="text-gray-500 hover:text-gray-800">PROFILE</a>
+                @endif
                 <a href="/contact" class="text-gray-500 hover:text-gray-800">CONTACT</a>
             </div>
         </div>
@@ -27,7 +29,9 @@
                     </svg>
                 </button>
             </div>
+
             <div class="flex items-center space-x-4">
+                @if (Auth::check())
                 <a href="{{ route('user.notification') }}" class="relative">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -37,6 +41,7 @@
                     <span
                         class="absolute -top-1 -right-1 bg-yellow-400 rounded-full w-4 h-4 text-xs flex items-center justify-center">1</span>
                 </a>
+                @endif
                 @if (Auth::check())
                     <div class="relative group">
                         <button class="text-black hover:text-blue-700 focus:outline-none mr-4">

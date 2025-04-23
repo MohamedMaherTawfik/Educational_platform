@@ -13,14 +13,10 @@ class PaymentRepository implements paymentInterface
 {
     private $apiKey;
     private $baseUrl;
-    private $courseRepository;
-    private $integrationId;
     public function __construct(CoursesInterface $courseRepository)
     {
         $this->apiKey = config('services.paymob.api_key');
         $this->baseUrl = 'https://accept.paymob.com/api';
-        $this->integrationId = config('services.paymob.integration_id');
-        $this->courseRepository = $courseRepository;
     }
 
 
@@ -36,8 +32,6 @@ class PaymentRepository implements paymentInterface
 
         $authToken = $authResponse->json('token');
 
-        // dd($authToken,$id,$total,);
-
         // Step 2: Create order
         $enrollmentResponse = Http::post("{$this->baseUrl}/ecommerce/orders", [
             'auth_token' => $authToken,
@@ -46,17 +40,14 @@ class PaymentRepository implements paymentInterface
             'merchant_order_id' => $id,
             'items' => [
                 [
-                    'name' => 'Course',
+                    'name' => 'Course Name',
                     'amount_cents' => (int) ($total * 100),
                     'quantity' => 1,
                 ]
             ]
         ]);
-
-        // dd($enrollmentResponse->json());
+        dd($enrollmentResponse->json());
         $enrollmentId = $enrollmentResponse->json('id');
-        // dd($enrollmentResponse
-        // ->json());
 
         // Step 3: Generate payment key
         $paymentKeyResponse = Http::post("{$this->baseUrl}/acceptance/payment_keys", [

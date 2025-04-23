@@ -6,6 +6,7 @@ use App\Http\Controllers\web\admin\adminController;
 use App\Http\Controllers\web\admin\courseController;
 use App\Http\Controllers\web\admin\lessonController;
 use App\Http\Controllers\web\auth\AuthController;
+use App\Http\Middleware\AuthCheck;
 use App\Http\Middleware\web\checkAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +33,7 @@ Route::controller(courseController::class)->group(function () {
     Route::get('/admin/courses', 'courses')->name('admin.courses')->middleware(checkAdmin::class);
     Route::get('/admin/courses/create', 'create')->name('admin.courses.create')->middleware(checkAdmin::class);
     Route::post('/admin/courses/create', 'store')->name('admin.courses.store')->middleware(checkAdmin::class);
-    Route::get('/course/{id}', 'showUser')->name('course.show');
+    Route::get('/course/{id}', 'showUser')->name('course.show')->middleware(AuthCheck::class);
     Route::get('admin/course/{id}', 'show')->name('admin.course.show')->middleware(checkAdmin::class);
     Route::delete('admin/course/{id}', 'destroy')->name('admin.course.destroy')->middleware(checkAdmin::class);
 });
