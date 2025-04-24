@@ -37,4 +37,9 @@ class homeController extends Controller
         return view('home.notification');
     }
 
+    public function contact()
+    {
+        return view('home.contact');
+    }
+
 }

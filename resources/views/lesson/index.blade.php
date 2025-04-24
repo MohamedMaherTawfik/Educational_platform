@@ -24,7 +24,7 @@
             @foreach ($lessons as $lesson)
                 <div class="rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col h-full">
                     <div class="w-full h-64 overflow-hidden">
-                        <img class="w-full h-full object-cover" src="{{ asset('images/laravelImage.jpg') }}"
+                        <img class="w-full h-full object-cover" src="{{ asset('storage/lessons/' . $lesson->image) }}"
                             alt="Lesson Image">
                     </div>
                     <div class="p-4 flex-grow">
@@ -32,7 +32,7 @@
                         <p class="text-gray-600">{{ $lesson->description }}</p>
                     </div>
                     <div class="p-4 flex justify-end">
-                        <a href=""
+                        <a href="{{ route('lesson.show', $lesson->id) }}"
                             class="bg-red-500 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
                             View Lesson
                         </a>

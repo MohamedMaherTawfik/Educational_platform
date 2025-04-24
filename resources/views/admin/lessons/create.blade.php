@@ -27,8 +27,21 @@
                     @enderror
                 </div>
 
+                {{-- <!-- Upload Image --}}
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-gray-700">lesson image</label>
+                        <input type="file" name="image" value="{{ old('image') }}" id="image" accept="image/*" required
+                            class="mt-1 block w-full text-gray-700 file:mr-4 file:py-2 file:px-4
+                            file:rounded-full file:border-0
+                            file:text-sm file:font-semibold
+                            file:bg-blue-50 file:text-blue-700
+                            hover:file:bg-blue-100">
+                        @error('image')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
 
-                <!-- Upload Image -->
+                <!-- Upload video -->
                 <div>
                     <label for="video" class="block text-sm font-medium text-gray-700">lesson video</label>
                     <input type="file" name="video" value="{{ old('video') }}" id="video" accept="video/*" required

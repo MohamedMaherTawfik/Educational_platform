@@ -15,6 +15,7 @@ Route::controller(homeController::class)->group(function () {
     Route::get('/user/courses', 'userCourses')->name('user.courses');
     Route::get('/user/profile', 'profile')->name('user.profile');
     Route::get('/user/notification', 'notification')->name('user.notification');
+    Route::get('/contact', 'contact')->name('contact');
 });
 
 Route::controller(AuthController::class)->group(function () {
@@ -42,6 +43,7 @@ Route::controller(lessonController::class)->group(function () {
     Route::get('/admin/course/{id}/lessons', 'index')->name('admin.lessons')->middleware(checkAdmin::class);
     Route::get('/admin/course/{id}/lessons/create', 'create')->name('admin.lessons.create')->middleware(checkAdmin::class);
     Route::post('/admin/course/{id}/lessons/create', 'store')->name('admin.lessons.store')->middleware(checkAdmin::class);
+    Route::get('lesson/{id}', 'showUser')->name('lesson.show')->middleware(AuthCheck::class);
     Route::get('/admin/course/{id}/lessons/{lesson_id}', 'show')->name('admin.lessons.show')->middleware(checkAdmin::class);
     Route::delete('/admin/course/{id}/lessons/{lesson_id}', 'destroy')->name('admin.lessons.destroy')->middleware(checkAdmin::class);
 });

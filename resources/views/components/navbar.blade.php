@@ -14,7 +14,7 @@
                 @if (Auth::check())
                     <a href="{{ route('user.profile') }}" class="text-gray-500 hover:text-gray-800">PROFILE</a>
                 @endif
-                <a href="/contact" class="text-gray-500 hover:text-gray-800">CONTACT</a>
+                <a href="{{ route('contact') }}" class="text-gray-500 hover:text-gray-800">CONTACT</a>
             </div>
         </div>
         <div class="flex items-center space-x-4">

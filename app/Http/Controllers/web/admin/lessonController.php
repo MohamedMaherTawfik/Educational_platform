@@ -7,8 +7,6 @@ use App\Http\Requests\lessonRequest;
 use App\Interfaces\LessonInterface;
 use App\Models\Courses;
 use App\Models\lesson;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class lessonController extends Controller
 {
@@ -38,19 +36,29 @@ class lessonController extends Controller
             $name = time() . '.' . $file->getClientOriginalName();
             $file->storeAs('videos', $name, 'public');
             $fields['video'] = $name;
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('lessons', $imageName, 'public');
+            $fields['image'] = $imageName;
             try {
                 $this->lessonRepository->createLesson($fields, request('id'));
                 return redirect()->back()->with('success', 'Lesson created successfully');
             } catch (\Throwable $th) {
-
+                return redirect()->back()->with('error', $th->getMessage());
             }
         }
     }
 
     public function show()
     {
-        $lesson = lesson::find(request('lesson_id'));
+        $lesson = $this->lessonRepository->getLesson(request('id'));
         return view('admin.lessons.show', compact('lesson'));
+    }
+
+    public function showUser()
+    {
+        $lesson=$this->lessonRepository->getLesson(request('id'));
+        return view('lesson.show',compact('lesson'));
     }
 
     public function destroy()

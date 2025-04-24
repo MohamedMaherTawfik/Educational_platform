@@ -24,20 +24,17 @@ class PaymentRepository implements paymentInterface
     {
         $id=$enrollment->id;
         $total=$enrollment->price;
-
         // Step 1: Generate auth token
         $authResponse = Http::post("{$this->baseUrl}/auth/tokens", [
             'api_key' => $this->apiKey,
         ]);
-
         $authToken = $authResponse->json('token');
-
         // Step 2: Create order
         $enrollmentResponse = Http::post("{$this->baseUrl}/ecommerce/orders", [
             'auth_token' => $authToken,
             'amount_cents' => (int) ($total * 100),
             'currency' => 'EGP',
-            'merchant_order_id' => $id,
+            'merchant_order_id' => $id . '-' . uniqid(),
             'items' => [
                 [
                     'name' => 'Course Name',
@@ -46,7 +43,7 @@ class PaymentRepository implements paymentInterface
                 ]
             ]
         ]);
-        dd($enrollmentResponse->json());
+        // dd($enrollmentResponse->json());
         $enrollmentId = $enrollmentResponse->json('id');
 
         // Step 3: Generate payment key
@@ -82,8 +79,7 @@ class PaymentRepository implements paymentInterface
         Log::info('Paymob Callback Data:', $requestData);
 
         if (isset($requestData['success']) && $requestData['success'] == 'true') {
-            $enrollment = Enrollments::where('id', $requestData['merchant_order_id'])->first();
-
+            $enrollment = Enrollments::where('user_id', Auth::user()->id)->where('enrolled', 'no')->first();
             if ($enrollment) {
                 $enrollment->update([
                 'transaction_status' => 'paid',

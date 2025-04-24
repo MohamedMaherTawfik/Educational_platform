@@ -25,6 +25,7 @@ class lessonRequest extends FormRequest
             'title' => 'required|min:3|max:50',
             'description' => 'min:15|max:255',
             'video' => 'nullable|max:1024000',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

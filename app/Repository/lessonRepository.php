@@ -27,6 +27,7 @@ class lessonRepository implements LessonInterface
             'description' => $data['description'],
             'video' => $data['video'],
             'courses_id' => $id,
+            'image' => $data['image'],
             'user_id' => Auth::user()->id
         ]);
         return $lesson;

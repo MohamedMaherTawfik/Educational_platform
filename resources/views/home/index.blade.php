@@ -94,7 +94,7 @@
                 @foreach ($courses as $course)
                     <div
                         class="max-w-sm rounded-2xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
-                        <img class="w-full h-48 object-cover" src="{{ asset('courses/' . $course->image) }}"
+                        <img class="w-full h-48 object-cover" src="{{ asset( 'courses/'. $course->image) }}"
                             alt="Course Image">
 
                         <div class="p-6">
