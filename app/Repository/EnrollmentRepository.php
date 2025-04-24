@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class EnrollmentRepository implements EnrollmentsInterface
 {
-    public function index($course_id)
+    public function index()
     {
-        $enrollments = Enrollments::where('courses_id', $course_id)->get();
+        $enrollments = Enrollments::get();
         return $enrollments;
     }
     public function store($course_id,$price)

@@ -1,7 +1,7 @@
 <x-dashboard title="Courses">
     <!-- Your page content goes here -->
     <div class="p-6 bg-white shadow-md flex items-center justify-between">
-        <h1 class="text-2xl font-bold text-gray-800">All Courses</h1>
+        <h1 class="text-2xl font-bold text-gray-800">All lessons</h1>
         <form action="{{route('admin.lessons.create', $course->id)}}" method="get">
             <button type="submit" class="bg-green-600 hover:bg-green-900 text-white px-4 py-2 rounded-lg shadow">
                 <i class="fas fa-plus mr-2"></i>Add New Lesson

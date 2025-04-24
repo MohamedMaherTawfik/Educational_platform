@@ -20,8 +20,9 @@ class enrollmentContoller extends Controller
     }
     public function index()
     {
-        $enrollments = $this->enrollmentRepository->index(request('id'));
-        return view('admin.enrollments.index', compact('enrollments'));
+        $enrollments = $this->enrollmentRepository->index();
+        $courses = $this->courseRepository->getCourse($enrollments->pluck('courses_id'));
+        return view('admin.enrollments.index', compact( 'courses', 'enrollments'));
     }
 
     public function pay()
