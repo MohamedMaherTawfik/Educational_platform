@@ -64,7 +64,6 @@ class courseController extends Controller
     {
         $course = $this->courseRepository->getCourse(request('id'));
         $enrollments=Enrollments::where('courses_id',$course->id)->where('user_id',Auth::user()->id)->get();
-        // dd($enrollments);
         if($enrollments->count()>0 && $enrollments->toArray()[0]['enrolled']=='yes'){
             $lessons=lesson::where('courses_id',$course->id)->paginate(3);
             return view('lesson.index', compact('lessons','course'));

@@ -28,7 +28,8 @@ class homeController extends Controller
 
     public function profile()
     {
-        $courses=Courses::where('user_id',Auth::user()->id)->get();
+        $enrollments=Enrollments::where('user_id',Auth::user()->id)->where('enrolled','yes')->get();
+        $courses=Courses::whereIn('id',$enrollments->pluck('courses_id'))->get();
         return view('home.profile',compact('courses'));
     }
 
