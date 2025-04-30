@@ -77,9 +77,11 @@ class PaymentRepository implements paymentInterface
     public function callBack($requestData)
     {
         Log::info('Paymob Callback Data:', $requestData);
-
+        $string = $requestData['merchant_order_id'];
+        $parts = explode("-", $string);
+        $numberBeforeHyphen = $parts[0];
         if (isset($requestData['success']) && $requestData['success'] == 'true') {
-            $enrollment = Enrollments::where('user_id', Auth::user()->id)->where('enrolled', 'no')->first();
+            $enrollment = Enrollments::where('id',$numberBeforeHyphen);
             if ($enrollment) {
                 $enrollment->update([
                 'transaction_status' => 'paid',
