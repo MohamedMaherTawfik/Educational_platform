@@ -27,7 +27,6 @@ class userRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'phone' => 'required|min:5',
             'password' => ['required','confirmed',Password::min(8)->mixedCase()->numbers()],
-            'academic_year' => 'required|min:4|max:15',
         ];
     }
 }

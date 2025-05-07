@@ -30,8 +30,8 @@ Route::controller(CourseController::class)->group(function () {
     Route::get('/courses', 'index');
     Route::get('/course/{id}', 'find');
     Route::post('/course', 'store')->middleware('jwt.auth')->middleware(adminCheck::class);
-    Route::post('/course/{id}', 'update');
-    Route::delete('/course/{id}', 'destroy');
+    Route::post('/course/{id}', 'update')->middleware('jwt.auth')->middleware(adminCheck::class);;
+    Route::delete('/course/{id}', 'destroy')->middleware('jwt.auth')->middleware(adminCheck::class);;
 });
 
 Route::controller(lessonController::class)->group(function () {
