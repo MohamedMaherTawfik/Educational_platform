@@ -6,13 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Courses;
 use App\Models\Enrollments;
 use Illuminate\Support\Facades\Auth;
+use App\Interfaces\CoursesInterface;
 
 class homeController extends Controller
 {
+    private $courseRepository;
+    public function __construct(CoursesInterface $courseRepository)
+    {
+        $this->courseRepository = $courseRepository;
+    }
     public function index()
     {
-        $courses=Courses::paginate(4);
-        return view('home.index',compact('courses'));
+        $courses=$this->courseRepository->allCourses();
+        $latestCourses=$this->courseRepository->newCourses();
+        return view('home.index',compact('courses','latestCourses'));
     }
 
     public function userCourses()
